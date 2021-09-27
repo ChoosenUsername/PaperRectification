@@ -44,7 +44,7 @@ def h2c_for_set(vp):
 # Vertical lines filtration #
 #############################
 
-start_image = imread("img/img1.jpg")
+start_image = imread("/home/pavel/PaperRectification/img/img36.jpg")
 
 output_image = start_image
 
@@ -54,7 +54,7 @@ width = start_image.shape[1]
 n = start_image.shape[0]
 m = start_image.shape[1]
 
-cross_vertical = np.load('npy/cross_vertical.npy', allow_pickle=True)
+cross_vertical = np.load('/home/pavel/PaperRectification/npy/cross_vertical.npy', allow_pickle=True)
 
 
 current_amount = 0
@@ -101,14 +101,14 @@ for i,j,k in zip(satelite_points, check_points, upd_vertical):
 
 
 debug_lines = vertical[best_mask]
-np.save( 'npy/vertical_debug_lines', debug_lines)
+np.save( '/home/pavel/PaperRectification/npy/vertical_debug_lines', debug_lines)
 
 
 vp1 = vanish_point
 print(current_amount, 'for', vanish_point)
 
 
-canvas = image.imread('img/img1.jpg')
+canvas = image.imread('/home/pavel/PaperRectification/img/img36.jpg')
 
 for l in debug_lines:
     angle = l[1]
@@ -130,14 +130,14 @@ cartesian_vp1 = h2c(vp1)
 plt.axline((width/2, height/2), (cartesian_vp1[0], cartesian_vp1[1]) , linewidth=1, linestyle='--', dashes=(5, 3), color='g')
 
 plt.imshow(canvas)
-plt.savefig("img/vertical_debug_lines.jpg", dpi = 1500)
+plt.savefig("/home/pavel/PaperRectification/img/vertical_debug_lines.jpg", dpi = 1500)
 plt.clf()
 
 ###############################
 # Horizontal lines filtration #
 ###############################
 
-start_image = imread("img/img1.jpg")
+start_image = imread("/home/pavel/PaperRectification/img/img36.jpg")
 
 output_image = start_image
 
@@ -147,7 +147,7 @@ width = start_image.shape[1]
 n = start_image.shape[0]
 m = start_image.shape[1]
 
-cross_horizontal = np.load('npy/cross_horizontal.npy',allow_pickle=True)
+cross_horizontal = np.load('/home/pavel/PaperRectification/npy/cross_horizontal.npy',allow_pickle=True)
 
 
 current_amount = 0
@@ -193,14 +193,14 @@ for i,j,k in zip(satelite_points, check_points, upd_horizontal):
         closes_line_index = np.argmin(dist)
 
 debug_lines = horizontal[best_mask]
-np.save( 'npy/horizontal_debug_lines', debug_lines)
+np.save( '/home/pavel/PaperRectification/npy/horizontal_debug_lines', debug_lines)
 
 
 vp2 = vanish_point
 print(current_amount, 'for', vanish_point)
 
 
-canvas = image.imread('img/img1.jpg')
+canvas = image.imread('/home/pavel/PaperRectification/img/img36.jpg')
 for l in debug_lines:
     angle = l[1]
     dist = l[2]
@@ -223,8 +223,8 @@ plt.axline((width/2, height/2), (cartesian_vp2[0], cartesian_vp2[1]) , linewidth
 
 
 plt.imshow(canvas)
-plt.savefig("img/horizontal_debug_lines.jpg", dpi = 1500)
+plt.savefig("/home/pavel/PaperRectification/img/horizontal_debug_lines.jpg", dpi = 1500)
 
 
-np.save( 'npy/vanish_points', np.array([vp1, vp2]))
+np.save( '/home/pavel/PaperRectification/npy/vanish_points', np.array([vp1, vp2]))
 

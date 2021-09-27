@@ -24,30 +24,19 @@ import cv2 as cv
 from matplotlib import image
 
 
+canvas = image.imread('/home/pavel/PaperRectification/img/img36.jpg')
 
-def h2c(vp):
-    zero = np.finfo(np.float64).tiny
-    if vp[2] == 0:
-        vp = np.array([vp[0]/zero, vp[1]/zero])
-        return vp
-    else:
-        vp = np.array([vp[0]/vp[2], vp[1]/vp[2]])
-        return vp
-
-
-canvas = image.imread('img/img1.jpg')
-
-start_image = imread("img/img1.jpg")
+start_image = imread("/home/pavel/PaperRectification/img/img36.jpg")
 res = start_image
 
 
 h = start_image.shape[0]
 w = start_image.shape[1]
 
-vertical = np.load('npy/vertical_debug_lines.npy', allow_pickle = True)
-horizontal = np.load('npy/horizontal_debug_lines.npy', allow_pickle=True)
+vertical = np.load('/home/pavel/PaperRectification/npy/vertical_debug_lines.npy', allow_pickle = True)
+horizontal = np.load('/home/pavel/PaperRectification/npy/horizontal_debug_lines.npy', allow_pickle=True)
 
-vanish_points = np.load('npy/vanish_points.npy', allow_pickle=True)
+vanish_points = np.load('/home/pavel/PaperRectification/npy/vanish_points.npy', allow_pickle=True)
 
 horizontal_temp_line_index = np.random.choice(horizontal.shape[0], 1)
 vertical_temp_line_index = np.random.choice(vertical.shape[0], 1)
@@ -186,7 +175,7 @@ x4 = (b2 - b3)/(a3-a2)
 y4 = a3*(b2-b3)/(a3-a2) + b3
 
 plt.imshow(canvas)
-plt.savefig("img/border.jpg", dpi = 1500)
+plt.savefig("/home/pavel/PaperRectification/img/border.jpg", dpi = 1500)
 plt.clf()
 
 
@@ -197,5 +186,5 @@ dst = np.array([ [0,h-1], [0,0], [w-1,h-1], [w-1,0] ])
 tform = transform.estimate_transform('projective', src, dst)
 tf_img = transform.warp(start_image, tform.inverse)
 
-imsave("img/result.jpg", img_as_ubyte(tf_img))
+imsave("/home/pavel/PaperRectification/img/result.jpg", img_as_ubyte(tf_img))
 

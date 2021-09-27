@@ -21,9 +21,9 @@ from skimage.filters.rank import equalize
 from skimage.morphology import disk
 from skimage.filters import median, threshold_otsu
 
-working_image = imread("img/funny.jpg")
+working_image = imread("/home/pavel/PaperRectification/img/img36.jpg")
 
-canvas = image.imread('img/funny.jpg')
+canvas = image.imread('/home/pavel/PaperRectification/img/img36.jpg')
 
 height = working_image.shape[0]
 width = working_image.shape[1]
@@ -33,8 +33,8 @@ thresh = threshold_niblack(gray_image)
 binary = np.invert(gray_image > thresh)
 binary = img_as_ubyte(skeletonize(binary))
 
-imsave("img/binary.jpg", binary)
-'''
+imsave("/home/pavel/PaperRectification/img/binary.jpg", binary)
+
 tested_angles = np.linspace(-np.pi / 2, np.pi / 2, 360, endpoint=False)
 h, theta, d = hough_line(binary, theta=tested_angles)
 
@@ -54,19 +54,18 @@ for _, angle, dist in zip(*hough_line_peaks(h, theta, d)):
     degress = (angle * 180 / np.pi)
     #plt.axline((x0, y0), slope=np.tan(angle + np.pi/2), linewidth=0.3, color='r')
     if np.abs(degress) > 0 and np.abs(degress) < 45:
-        #plt.axline((x0, y0), slope=np.tan(angle + np.pi/2), linewidth=0.3, color='r')
+        plt.axline((x0, y0), slope=np.tan(angle + np.pi/2), linewidth=0.3, color='r')
         cross_vertical.append( np.array([np.cross((pt1[0], pt1[1], 1), (pt2[0], pt2[1], 1)), angle, dist],dtype=object))
     if np.abs(degress) > 70 and np.abs(degress) < 100:
         plt.axline((x0, y0), slope=np.tan(angle + np.pi/2), linewidth=0.3, color='b')
         cross_horizontal.append( np.array([np.cross((pt1[0], pt1[1], 1), (pt2[0], pt2[1], 1)), angle, dist],dtype=object))
 
 plt.imshow(canvas)
-plt.savefig("img/all_lines.jpg", dpi = 1500)
+plt.savefig("/home/pavel/PaperRectification/img/all_lines.jpg", dpi = 1500)
 
-with open('npy/cross_vertical.npy', 'wb') as f:
+with open('/home/pavel/PaperRectification/npy/cross_vertical.npy', 'wb') as f:
             np.save(f,  cross_vertical)
 
-with open('npy/cross_horizontal.npy', 'wb') as f:
+with open('/home/pavel/PaperRectification/npy/cross_horizontal.npy', 'wb') as f:
             np.save(f, cross_horizontal)
 
-'''
